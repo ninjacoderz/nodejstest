@@ -25,8 +25,13 @@ router.route('/get_curent_time')
     .post(function(req, res) {
         
         var timezone = req.body.timezone;  
-    	console.log(timezone);
-        res.json({ message: moment().utcOffset(timezone*60).format('YYYY-MM-DD HH:mm') });
+        if (-12 <= timezone && timezone <= 14) {
+	    	console.log(timezone);
+	        res.json({ message: moment().utcOffset(timezone*60).format('YYYY-MM-DD HH:mm') });
+        }
+        else {
+        	res.json({ message: 'Your value is exceed ( range -12 -> 14 )' });
+        }
         
     });
 
